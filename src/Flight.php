@@ -116,6 +116,19 @@
             $GLOBALS['DB']->exec("DELETE FROM flights;");
         }
 
+        static function find($id)
+        {
+            $found_flight = null;
+            $all_flights = Flight::getAll();
+            foreach ($all_flights as $flight) {
+                $flight_id = $flight->getId();
+                if ($flight_id == $id) {
+                    $found_flight = $flight;
+                }
+            }
+            return $found_flight;
+        }
+
 
 
 
