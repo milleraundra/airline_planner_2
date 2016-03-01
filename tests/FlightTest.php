@@ -6,6 +6,7 @@
     */
 
     require_once "src/Flight.php";
+    require_once "src/City.php";
 
     $server = 'mysql:host=localhost;dbname=airline_planner_test';
     $username = 'root';
@@ -22,8 +23,15 @@
 
         function test_allGetters()
         {
-            $departure_id = 3;
-            $arrival_id = 4;
+            $name = "Portland";
+            $id = null;
+            $test_city1 = new City($name, $id);
+
+            $name2 = "New York";
+            $test_city2 = new City($name2, $id);
+
+            $departure_id = $test_city1->getId();
+            $arrival_id = $test_city2->getId();
             $flight_number = "FF900";
             $status = "On-Time";
             $departure_time = "2015-01-01 01:01:01";
@@ -39,8 +47,8 @@
             $result5 = $test_flight->getDepartureTime();
             $result6 = $test_flight->getArrivalTime();
 
-            $this->assertEquals($departure_id, $result1);
-            $this->assertEquals($arrival_id, $result2);
+            $this->assertEquals($departure_id, is_numeric($result1));
+            $this->assertEquals($arrival_id, is_numeric($result2));
             $this->assertEquals($flight_number, $result3);
             $this->assertEquals($status, $result4);
             $this->assertEquals($departure_time, $result5);
@@ -169,9 +177,35 @@
             $result = Flight::find($test_flight->getId());
 
             $this->assertEquals($test_flight, $result);
-
         }
 
+        function test_update()
+        {
+            $departure_id = 3;
+            $arrival_id = 4;
+            $flight_number = "FF900";
+            $status = "On-Time";
+            $departure_time = "2015-01-01 01:01:01";
+            $arrival_time = "2015-01-01 01:01:01";
+            $id = null;
+
+            $test_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_time, $arrival_time, $id);
+
+            $status2 = "Delayed";
+            $departure_time2 = "2015-02-01 01:02:01";
+            $arrival_time2 = "2015-02-01 04:01:01";
+
+            $test_flight->update($status2, $departure_time2, $arrival_time2);
+
+            $result1 = $test_flight->getStatus();
+            $result2 = $test_flight->getDepartureTime();
+            $result3 = $test_flight->getArrivalTime();
+
+            $this->assertEquals($status2, $result1);
+            $this->assertEquals($departure_time2, $result2);
+            $this->assertEquals($arrival_time2, $result3);
+
+        }
     }
 
  ?>

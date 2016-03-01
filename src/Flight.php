@@ -129,6 +129,14 @@
             return $found_flight;
         }
 
+        function update($new_status, $new_departure_time, $new_arrival_time)
+        {
+            $GLOBALS['DB']->exec("UPDATE flights SET status = '{$new_status}', departure_time = '{$new_departure_time}', arrival_time = '{$new_arrival_time}';");
+            $this->setStatus($new_status);
+            $this->setDepartureTime($new_departure_time);
+            $this->setArrivalTime($new_arrival_time);
+        }
+
 
 
 

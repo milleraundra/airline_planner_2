@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Airline Planner</title>
+    </head>
+    <body>
+        <form class="" action="/flight" method="post">
+            <label for="departure">Departure City</label>
+            <select class="" name="departure">
+                {% for flight in flights %}
+                <option value="{{ flight.getId }}">{{ flight.getName }}</option>
+                {% endfor %}
+            </select>
+            <label for="arrival">Arrival City</label>
+            <select class="" name="arrival">
+                {% for flight in flights %}
+                <option value="{{ flight.getId }}">{{ flight.getName }}</option>
+                {% endfor %}
+            </select>
+            <label for="flight_number">Flight Number:</label>
+            <input type="text" name="flight_number" value="">
+            <label for="status">Status:</label>
+            <select class="" name="status">
+                <option value="on_time">On-Time</option>
+                <option value="delayed">Delayed</option>
+                <option value="early">Early</option>
+                <option value="cancelled">Cancelled</option>
+            </select>
+            <label for="departure_time">Departure Time:</label>
+            <input type="dateTIME OR TIME...OR DATE!" name="name" value="">
+        </form>
+    </body>
+</html>
