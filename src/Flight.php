@@ -86,7 +86,35 @@
             return $this->id;
         }
 
+        function save()
+        {
+            $GLOBALS['DB']->exec("INSERT INTO flights (departure_id, arrival_id, flight_number, status, departure_time, arrival_time) VALUES ({$this->getDepartureId()}, {$this->getArrivalId()}, '{$this->getFlightNumber()}', '{$this->getStatus()}', '{$this->getDepartureTime()}', '{$this->getArrivalTime()}');");
+            $this->id = $GLOBALS['DB']->lastInsertId();
+        }
 
+        static function getAll()
+        {
+            $returned_flights = $GLOBALS['DB']->query("SELECT * FROM flights;");
+            $flights = array();
+            foreach($returned_flights as $flight) {
+                $departure_id = $flight['departure_id'];
+                $arrival_id = $flight['arrival_id'];
+                $flight_number = $flight['flight_number'];
+                $status = $flight['status'];
+                $departure_time = $flight['departure_time'];
+                $arrival_time = $flight['arrival_time'];
+                $id = $flight['id'];
+
+                $new_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_time, $arrival_time, $id);
+                array_push($flights, $new_flight);
+            }
+            return $flights;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM flights;");
+        }
 
 
 
