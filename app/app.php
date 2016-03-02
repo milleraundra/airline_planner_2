@@ -21,7 +21,15 @@
     ));
 
     $app->get("/", function() use ($app) {
-    return $app['twig']->render('index.html.twig');
+        $flights = Flight::getAll();
+    return $app['twig']->render('index.html.twig', array('flights' => $flights));
+    });
+
+    $app->post("/add/flight", function() use ($app) {
+        $new_flight = new Flight($_POST['departure_id'], $_POST['arrival_id'], $_POST['flight_number'], $_POST['status'], $_POST['departure_date'], $_POST['departure_time']);
+        $new_flight->save();
+        $flights = Flight::getAll();
+
     });
 
     return $app;

@@ -5,15 +5,30 @@
         <title>Airline Planner</title>
     </head>
     <body>
-        <form class="" action="/flight" method="post">
-            <label for="departure">Departure City</label>
-            <select class="" name="departure">
+        <h1>Airline Planner</h1>
+        <h2>View flights you've scheduled or add a new flight.</h2>
+        {% if flights is not empty %}
+            <h3>Flights:</h3>
+            <ul>
+                {% for flight in flights %}
+                    <li><a href="/flight/{{ flight.getId }}">From {{
+
+
+                        ? How do I collect a name in a seperate table using an ID in a join table ?
+
+                    }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form class="" action="/add/flight" method="post">
+            <label for="departure_id">Departure City</label>
+            <select class="" name="departure_id">
                 {% for flight in flights %}
                 <option value="{{ flight.getId }}">{{ flight.getName }}</option>
                 {% endfor %}
             </select>
-            <label for="arrival">Arrival City</label>
-            <select class="" name="arrival">
+            <label for="arrival_id">Arrival City</label>
+            <select class="" name="arrival_id">
                 {% for flight in flights %}
                 <option value="{{ flight.getId }}">{{ flight.getName }}</option>
                 {% endfor %}
@@ -27,8 +42,11 @@
                 <option value="early">Early</option>
                 <option value="cancelled">Cancelled</option>
             </select>
+            <label for="departure_date">Departure Date:</label>
+            <input type="date" name="departure_date" value="">
             <label for="departure_time">Departure Time:</label>
-            <input type="dateTIME OR TIME...OR DATE!" name="name" value="">
+            <input type="time" name="departure_time" value="">
+            <button type="submit">Add Flight</button>
         </form>
     </body>
 </html>

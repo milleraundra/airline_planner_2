@@ -34,25 +34,26 @@
             $arrival_id = $test_city2->getId();
             $flight_number = "FF900";
             $status = "On-Time";
-            $departure_time = "2015-01-01 01:01:01";
-            $arrival_time = "2015-01-01 01:01:01";
+            $departure_date = "2015-01-01";
+            $departure_time = "01:01:01";
             $id = null;
 
-            $test_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_time, $arrival_time, $id);
+            $test_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_date, $departure_time, $id);
 
             $result1 = $test_flight->getDepartureId();
             $result2 = $test_flight->getArrivalId();
             $result3 = $test_flight->getFlightNumber();
             $result4 = $test_flight->getStatus();
-            $result5 = $test_flight->getDepartureTime();
-            $result6 = $test_flight->getArrivalTime();
+            $result5 = $test_flight->getDepartureDate();
+            $result6 = $test_flight->getDepartureTime();
 
             $this->assertEquals($departure_id, is_numeric($result1));
             $this->assertEquals($arrival_id, is_numeric($result2));
             $this->assertEquals($flight_number, $result3);
             $this->assertEquals($status, $result4);
-            $this->assertEquals($departure_time, $result5);
-            $this->assertEquals($arrival_time, $result6);
+            $this->assertEquals($departure_date, $result5);
+            $this->assertEquals($departure_time, $result6);
+
         }
 
         function test_getId()
@@ -61,11 +62,11 @@
             $arrival_id = 4;
             $flight_number = "FF900";
             $status = "On-Time";
-            $departure_time = "2015-01-01 01:01:01";
-            $arrival_time = "2015-01-01 01:01:01";
+            $departure_date = "2015-01-01";
+            $departure_time = "01:01:01";
             $id = 1;
 
-            $test_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_time, $arrival_time, $id);
+            $test_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_date, $departure_time, $id);
 
             $result = $test_flight->getId();
 
@@ -78,11 +79,11 @@
             $arrival_id = 4;
             $flight_number = "FF900";
             $status = "On-Time";
-            $departure_time = "2015-01-01 01:01:01";
-            $arrival_time = "2015-01-01 01:01:01";
-            $id = null;
+            $departure_date = "2015-01-01";
+            $departure_time = "01:01:01";
+            $id = 1;
 
-            $test_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_time, $arrival_time, $id);
+            $test_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_date, $departure_time, $id);
 
             $test_flight->save();
             $result = Flight::getAll();
@@ -96,20 +97,20 @@
             $arrival_id = 4;
             $flight_number = "FF900";
             $status = "On-Time";
-            $departure_time = "2015-01-01 01:01:01";
-            $arrival_time = "2015-01-01 01:01:01";
-            $id = null;
+            $departure_date = "2015-01-01";
+            $departure_time = "01:01:01";
+            $id = 1;
 
             $departure_id2 = 5;
             $arrival_id2 = 5;
             $flight_number2 = "QZ900";
             $status2 = "Delayed";
-            $departure_time2 = "2015-02-01 01:02:01";
-            $arrival_time2 = "2015-02-01 04:01:01";
+            $departure_date2 = "2015-02-01";
+            $departure_time2 = "01:02:01";
             $id = null;
 
-            $test_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_time, $arrival_time, $id);
-            $test_flight2 = new Flight($departure_id2, $arrival_id2, $flight_number2, $status2, $departure_time2, $arrival_time2, $id);
+            $test_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_date, $departure_time, $id);
+            $test_flight2 = new Flight($departure_id2, $arrival_id2, $flight_number2, $status2, $departure_date2, $departure_time2, $id);
 
             $test_flight->save();
             $test_flight2->save();
@@ -125,20 +126,20 @@
             $arrival_id = 4;
             $flight_number = "FF900";
             $status = "On-Time";
-            $departure_time = "2015-01-01 01:01:01";
-            $arrival_time = "2015-01-01 01:01:01";
-            $id = null;
+            $departure_date = "2015-01-01";
+            $departure_time = "01:01:01";
+            $id = 1;
 
             $departure_id2 = 5;
             $arrival_id2 = 5;
             $flight_number2 = "QZ900";
             $status2 = "Delayed";
-            $departure_time2 = "2015-02-01 01:02:01";
-            $arrival_time2 = "2015-02-01 04:01:01";
+            $departure_date2 = "2015-02-01";
+            $departure_time2 = "01:02:01";
             $id = null;
 
-            $test_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_time, $arrival_time, $id);
-            $test_flight2 = new Flight($departure_id2, $arrival_id2, $flight_number2, $status2, $departure_time2, $arrival_time2, $id);
+            $test_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_date, $departure_time, $id);
+            $test_flight2 = new Flight($departure_id2, $arrival_id2, $flight_number2, $status2, $departure_date2, $departure_time2, $id);
 
             $test_flight->save();
             $test_flight2->save();
@@ -152,24 +153,24 @@
 
         function test_find()
         {
-            $departure_id = 3;
+           $departure_id = 3;
             $arrival_id = 4;
             $flight_number = "FF900";
             $status = "On-Time";
-            $departure_time = "2015-01-01 01:01:01";
-            $arrival_time = "2015-01-01 01:01:01";
-            $id = null;
+            $departure_date = "2015-01-01";
+            $departure_time = "01:01:01";
+            $id = 1;
 
             $departure_id2 = 5;
             $arrival_id2 = 5;
             $flight_number2 = "QZ900";
             $status2 = "Delayed";
-            $departure_time2 = "2015-02-01 01:02:01";
-            $arrival_time2 = "2015-02-01 04:01:01";
+            $departure_date2 = "2015-02-01";
+            $departure_time2 = "01:02:01";
             $id = null;
 
-            $test_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_time, $arrival_time, $id);
-            $test_flight2 = new Flight($departure_id2, $arrival_id2, $flight_number2, $status2, $departure_time2, $arrival_time2, $id);
+            $test_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_date, $departure_time, $id);
+            $test_flight2 = new Flight($departure_id2, $arrival_id2, $flight_number2, $status2, $departure_date2, $departure_time2, $id);
 
             $test_flight->save();
             $test_flight2->save();
@@ -185,27 +186,46 @@
             $arrival_id = 4;
             $flight_number = "FF900";
             $status = "On-Time";
-            $departure_time = "2015-01-01 01:01:01";
-            $arrival_time = "2015-01-01 01:01:01";
-            $id = null;
+            $departure_date = "2015-01-01";
+            $departure_time = "01:01:01";
+            $id = 1;
 
-            $test_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_time, $arrival_time, $id);
+            $test_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_date, $departure_time, $id);
 
             $status2 = "Delayed";
-            $departure_time2 = "2015-02-01 01:02:01";
-            $arrival_time2 = "2015-02-01 04:01:01";
+            $departure_date2 = "2015-02-01";
+            $departure_time2 = "01:02:01";
 
-            $test_flight->update($status2, $departure_time2, $arrival_time2);
+            $test_flight->update($status2, $departure_date2, $departure_time2);
 
             $result1 = $test_flight->getStatus();
-            $result2 = $test_flight->getDepartureTime();
-            $result3 = $test_flight->getArrivalTime();
+            $result2 = $test_flight->getDepartureDate();
+            $result3 = $test_flight->getDepartureTime();
 
             $this->assertEquals($status2, $result1);
-            $this->assertEquals($departure_time2, $result2);
-            $this->assertEquals($arrival_time2, $result3);
+            $this->assertEquals($departure_date2, $result2);
+            $this->assertEquals($departure_time2, $result3);
+        }
 
+        function test_getDepartureCity()
+        {
+            $name = "Seattle";
+            $id = null;
+            $test_city = new City($name, $id);
+            $test_city->save();
+
+            $name2 = "Chicago";
+            $test_city2 = new City($name2, $id);
+            $test_city->save();
+
+            $departure_id = $test_city->getId();
+            $arrival_id = $test_city2->getId();
+            $flight_number = "C3PO";
+            $status = "On Time";
+            $departure_date = "2016-03-30";
+            $departure_time = "22:03:49";
+            $new_flight = $
         }
     }
 
- ?>
+?>

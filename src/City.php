@@ -61,6 +61,42 @@
             }
             return $found_city;
         }
+
+        function getDepartingFlights()
+        {
+            $found_flights = $GLOBALS['DB']->query("SELECT flights.* FROM cities JOIN flights USE (cities.id == flights.departure_id) WHERE id = {$this->getId()}";);
+            $departing_flights = array();
+            foreach($found_flights as $flight) {
+                $id = $flight['id'];
+                $departure_id = $flight['departure_id'];
+                $arrival_id = $flight['arrival_id'];
+                $flight_number = $flight['flight_number'];
+                $status = $flight['status'];
+                $departure_date = $flight['departure_date'];
+                $departure_time = $flight['departure_time'];
+                $new_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_date, $departure_time, $id);
+                array_push($departing_flights, $new_flight);
+            }
+            return $departing_flights;
+        }
+
+        function getArrivingFlights()
+        {
+         $found_flights = $GLOBALS['DB']->query("SELECT flights.* FROM cities JOIN flights USE (cities.id == flights.arrival_id) WHERE id = {$this->getId()}";);
+            $arriving_flights = array();
+            foreach($found_flights as $flight) {
+                $id = $flight['id'];
+                $departure_id = $flight['departure_id'];
+                $arrival_id = $flight['arrival_id'];
+                $flight_number = $flight['flight_number'];
+                $status = $flight['status'];
+                $departure_date = $flight['departure_date'];
+                $departure_time = $flight['departure_time'];
+                $new_flight = new Flight($departure_id, $arrival_id, $flight_number, $status, $departure_date, $departure_time, $id);
+                array_push($arriving_flights, $new_flight);
+            }
+            return $arriving_flights;   
+        }
     }
 
  ?>
